@@ -1,0 +1,4 @@
+title=pw19
+author=yourgameauthor
+api=1
+orientation=landscape
