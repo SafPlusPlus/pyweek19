@@ -9,7 +9,7 @@ class Assets:
     def __init__(self, data_dir='data', data_file='data/assets.txt'):
         self.data_dir = data_dir
         self.data_file = data_file
-        self.assets = {}
+        self._assets = {}
         
     def load_all(self):
         # load all assets
@@ -24,16 +24,19 @@ class Assets:
                 # Floor.png, tile1, 1, 4
                 try:
                     fn, id, ix, iy = (s.strip() for s in line.split(','))
+                    ix = int(ix)
+                    iy = int(iy)
                     if fn not in surf_cache:
                         surf_cache[fn] = pygame.image.load(os.path.join(self.data_dir, fn))
                         debug('loaded %s into loading cache' % fn)
-                    self.assets[id] = surf_cache[fn].subsurface(Rect(ix*tile_size, iy*tile_size, tile_size, tile_size))
+                    self._assets[id] = surf_cache[fn].subsurface(pygame.Rect(ix*tile_size, iy*tile_size, tile_size, tile_size))
                     debug('loaded %s as subsurface' % id)
                     
                 except ValueError:
                     warn('ValueError when loading line %d in the %s' % (line_no + 1, self.data_file))
-                    
-                
-        
+                       
         debug('Assets.load_all done')
+        
+    def __getitem__(self, *args, **kwargs):
+        return self._assets.__getitem__(*args, **kwargs)
     

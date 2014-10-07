@@ -29,9 +29,8 @@ class App:
     
         # load icon and set it
         # icon = pygame.image.load(os.path.join('.', 'afuckingbeachballright_icon.png'))
-        
-        
-        pygame.display.set_icon(icon)
+                
+        pygame.display.set_icon(self.assets['application_icon'])
         pygame.display.set_caption(self.name)
 
         self._surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
@@ -40,7 +39,10 @@ class App:
  
     def on_event(self, event):
         if event.type == pygame.QUIT:
-            self._running = False
+            self._quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.unicode == u'q' and (pygame.KMOD_META & event.mod):
+                self._quit()
 
     def on_loop(self):
         pass
@@ -61,6 +63,12 @@ class App:
             self.on_loop()
             self.on_render()
         self.on_cleanup()
+        
+    def _quit(self):
+        # quit + optional cleanup?
+        debug('Quitting...')
+        self._running = False
+        
 
 def main():
     """ your app starts here
