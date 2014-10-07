@@ -1,10 +1,10 @@
 Your Game Title
 ===============
 
-Entry in PyWeek #12  <http://www.pyweek.org/12/>
+Entry in PyWeek #19  <http://www.pyweek.org/19/>
 URL: http://pyweek.org/e/pw19
-Team: YOUR TEAM NAME (leave the "Team: bit")
-Members: YOUR TEAM MEMBERS (leave the "Members: bit")
+Team: SafPlusPlus
+Members: SafPlusPlus
 License: see LICENSE.txt
 
 
