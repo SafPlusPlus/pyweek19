@@ -1,0 +1,6 @@
+# file, identifier, x, y 
+# For now using a tileset image from http://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v18
+# for testing purposes courtesy of DawnBringer (attributing in case I forget to remove it... ;) )
+Floor.png, tile1, 1, 4
+# illegal line
+Floor.png, tile2, 1
