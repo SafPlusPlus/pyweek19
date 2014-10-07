@@ -1,0 +1,33 @@
+One Room:
+
+Rogue likeish theft thing, find the room with the goodies to steal, avoid cameras, guards, traps, no saves except one when in "the room"
+
+- 2d tilebased map (optionally with multiple layers)
+- optional player vision system
+- cameras detect you
+- guards who see you detect you
+- guards who hear you get alerted
+- pressure sensors
+- motion sensors (either move slow, or disable)
+- turn based, our actions take a certain amount of ticks, after your action finalized, other npcs also get to take actions
+
+Actions:
+- walk wasd
+- crouch wasd
+- crawl wasd
+- turn
+- 
+
+Modules
+- asset loader
+-- read list file
+-- load files into dicts
+
+Map renderer
+- render a bunch of tiles, back to front
+
+Viewport
+- dermine where the zoom is and render that part of the map
+
+Gui/Text rendering:
+- actions are rendered into text into a window
