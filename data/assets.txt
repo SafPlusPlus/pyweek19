@@ -2,6 +2,9 @@
 # For now using a tileset image from http://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v18
 # for testing purposes courtesy of DawnBringer (attributing in case I forget to remove it... ;) )
 Floor.png,      tile1,  1,  4
+Floor.png,      tile2,  1,  7
+Floor.png,      tile3,  1,  10
+Floor.png,      tile4,  1,  13
 Decor0.png,     chair,  0,  7
 # application icon
 icon.png, application_icon, 0,0

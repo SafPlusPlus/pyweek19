@@ -1,6 +1,10 @@
-import os, sys, logging, pygame
+import os, sys, time, logging, pygame, random
+
+from pygame import Color, Rect
 from logging import debug, info
 from assets import Assets
+
+random.seed(0) # hurhur
 
 # nicked from http://stackoverflow.com/questions/14058453/making-python-loggers-output-all-messages-to-stdout-in-addition-to-log
 root = logging.getLogger()
@@ -36,6 +40,55 @@ class App:
         self._surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         debug('on_init done')
+    
+    def test(self):
+        debug('test started')
+        # just a method in which I test some code :)
+        self._surf.fill(Color('white'))
+        pygame.draw.rect(self._surf, Color('black') , Rect(9,9,362,242), 1)
+        pygame.display.flip()
+        
+        time.sleep(0.5) # I want to see the process... :)
+        
+        map = self._surf.subsurface(Rect(10,10,360,240))
+        map.fill(Color('grey'))
+        pygame.display.flip()
+        
+        time.sleep(0.5) # I want to see the process... :)        
+        map.blit(self.assets['tile1'], (10,10))
+        pygame.display.flip()
+        
+        time.sleep(0.5) # I want to see the process... :)        
+        map.blit(self.assets['tile1'], (-5,-5))     
+        map.blit(self.assets['tile1'], (355,235))
+        pygame.display.flip()
+        
+        pool = ['tile1', 'tile2', 'tile3', 'tile4']
+        random_map = [[random.choice(pool) for i in xrange(6)] for j in xrange(4)]
+        
+        
+        random_i = [[random.randint(0,6) for i in xrange(6)] for j in xrange(4)]
+        
+        scroll_x = 0
+        scroll_y = 0
+        
+        for ix in xrange(6):
+            for iy in xrange(4):
+                offset_x = ix * 16 + scroll_x
+                offset_y = iy * 16 + scroll_y
+                map.blit(self.assets[random_map[iy][ix]], (offset_x,offset_y))
+                time.sleep(0.1)
+
+                if random_i[iy][ix] == 0:
+                    map.blit(self.assets['chair'], (offset_x,offset_y))
+                    time.sleep(0.1)
+                pygame.display.flip()
+                
+        
+        
+        
+        debug('test done')
+        
  
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -56,7 +109,9 @@ class App:
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
- 
+
+        self.test()
+
         while( self._running ):
             for event in pygame.event.get():
                 self.on_event(event)
