@@ -6,5 +6,8 @@ Floor.png,      tile2,  1,  7
 Floor.png,      tile3,  1,  10
 Floor.png,      tile4,  1,  13
 Decor0.png,     chair,  0,  7
+Wall.png,     wall1,  1,  4
 # application icon
 icon.png, application_icon, 0,0
+# stuff
+player_placeholder.png, player, 0,0

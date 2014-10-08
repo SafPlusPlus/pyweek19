@@ -3,6 +3,7 @@ import os, sys, time, logging, pygame, random
 from pygame import Color, Rect
 from logging import debug, info
 from assets import Assets
+from map import Map
 
 random.seed(0) # hurhur
 
@@ -23,6 +24,7 @@ class App:
         self.size = self.weight, self.height = 640, 480
         self.name = name or 'pw19'
         self.assets = Assets()
+        self._map = Map()
         debug('main init done')
  
     def on_init(self):
@@ -45,44 +47,52 @@ class App:
         debug('test started')
         # just a method in which I test some code :)
         self._surf.fill(Color('white'))
-        pygame.draw.rect(self._surf, Color('black') , Rect(9,9,362,242), 1)
+        pygame.draw.rect(self._surf, Color('black') , Rect(9,9,322+16,242), 1)
         pygame.display.flip()
         
-        time.sleep(0.5) # I want to see the process... :)
+        time.sleep(0.1) # I want to see the process... :)
         
-        map = self._surf.subsurface(Rect(10,10,360,240))
+        map = self._surf.subsurface(Rect(10,10,320+16,240))
         map.fill(Color('grey'))
         pygame.display.flip()
         
-        time.sleep(0.5) # I want to see the process... :)        
+        time.sleep(0.1) # I want to see the process... :)        
         map.blit(self.assets['tile1'], (10,10))
         pygame.display.flip()
         
-        time.sleep(0.5) # I want to see the process... :)        
+        time.sleep(0.1) # I want to see the process... :)        
         map.blit(self.assets['tile1'], (-5,-5))     
         map.blit(self.assets['tile1'], (355,235))
         pygame.display.flip()
         
         pool = ['tile1', 'tile2', 'tile3', 'tile4']
-        random_map = [[random.choice(pool) for i in xrange(6)] for j in xrange(4)]
+        map_height = 32
+        map_width = 32
         
-        
-        random_i = [[random.randint(0,6) for i in xrange(6)] for j in xrange(4)]
-        
+        random_map = [[random.choice(pool) for i in xrange(map_width)] for j in xrange(map_height)]        
+        random_i = [[random.randint(0,6) for i in xrange(map_width)] for j in xrange(map_height)]        
         scroll_x = 0
-        scroll_y = 0
-        
-        for ix in xrange(6):
-            for iy in xrange(4):
+        scroll_y = 0        
+        for ix in xrange(map_width):
+            for iy in xrange(map_height):
                 offset_x = ix * 16 + scroll_x
                 offset_y = iy * 16 + scroll_y
                 map.blit(self.assets[random_map[iy][ix]], (offset_x,offset_y))
-                time.sleep(0.1)
-
                 if random_i[iy][ix] == 0:
                     map.blit(self.assets['chair'], (offset_x,offset_y))
-                    time.sleep(0.1)
-                pygame.display.flip()
+        pygame.display.flip()
+        
+        time.sleep(0.5)
+        
+        self.map_area = map
+        self._map.set_viewport(self.map_area)
+        self._map.set_assets(self.assets)
+        self._map.generate_random_map()
+        self.map_area.fill(Color('white'))
+        self._map.render()
+        
+        
+                
                 
         
         

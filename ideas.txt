@@ -26,6 +26,7 @@ Modules
 Map renderer
 - render a bunch of tiles, back to front
 - first just render a bunch of tiles
+- determine viewport, and which tiles to show, render them 
 
 Viewport
 - dermine where the zoom is and render that part of the map
